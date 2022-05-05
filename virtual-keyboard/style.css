@@ -8,7 +8,7 @@ body {
     background: #004134;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
 }
 textarea {
     display: block;
@@ -50,5 +50,5 @@ textarea {
 }
 
 .space {
-    width: 265px;
+    width: 430px;
 }
