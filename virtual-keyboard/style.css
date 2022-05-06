@@ -27,7 +27,7 @@ textarea {
     justify-content: space-around;
     flex-wrap: wrap;
 }
-.keyboard_key {
+.key {
     margin: 5px;
     height: 45px;
     width: 45px;
@@ -47,8 +47,36 @@ textarea {
 
 .double-key {
     width: 100px;
+    margin: 5px;
+    height: 45px;
+    border-radius: 4px;
+    border: none;
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    font-size: 1.05rem;
+    outline: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: top;
+    padding: 0;
 }
 
 .space {
     width: 430px;
+    margin: 5px;
+    height: 45px;
+    border-radius: 4px;
+    border: none;
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    font-size: 1.05rem;
+    outline: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: top;
+    padding: 0;
 }
