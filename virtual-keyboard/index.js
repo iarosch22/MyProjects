@@ -98,6 +98,10 @@ function сreateKeyboard() {
         return data[index];
     }
 
+    document.addEventListener('keydown', function(event) {
+        event.preventDefault();
+        console.log(event);
+    })
     keyboard.addEventListener('click', function() {
         if(event.target.tagName === 'BUTTON') {
             let key = event.target.dataset.key;
