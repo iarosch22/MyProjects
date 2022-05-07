@@ -51,9 +51,9 @@ const ruCaps = ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=',
 
 
 function сreateKeyboard() {
-    let lang = 'ru';
+    let lang = 'en';
     let caps = false;
-    let shift = true;
+    let shift = false;
 
     const BODY = document.querySelector('body');
 
@@ -67,7 +67,7 @@ function сreateKeyboard() {
 
     keyboard.classList.add('keyboard');
 
-    for(let i = 0; i < enKeys.length; i++) {
+    for(let i = 0; i < 62; i++) {
         button = document.createElement('button');
 
         button.innerHTML = getKeyValue(i);
@@ -80,7 +80,11 @@ function сreateKeyboard() {
     function getKeyValue(index) {
         let key = '';
         if(lang === 'en') {
-            key = enKeys[index];
+            if(caps) {
+                key = enCaps[index];
+            } else {
+                key = enKeys[index];
+            }
         } else {
             key = ruKeys[index];
         }
@@ -98,20 +102,66 @@ function сreateKeyboard() {
         if(event.target.tagName === 'BUTTON') {
             let key = event.target.dataset.key;
             let index = data.indexOf(key);
-            textarea.innerHTML = textarea.innerHTML + getKeyValue(index);
+            
+            switch (key) {
+                case 'Tab':
+                    textarea.innerHTML = textarea.innerHTML + '    ';
+                    break;
+                case 'CapsLock':
+                    capslockKeyboard();
+                    break;
+                case 'ShiftLeft':
+                    shiftKeyboard();
+                    break;
+                case 'Enter':
+                    textarea.innerHTML = textarea.innerHTML + '\n';
+                    break;
+                case 'Backspace':
+                    backspaceKeyboard();
+                    break;
+                case 'Space':
+                    textarea.innerHTML = textarea.innerHTML + ' ';
+                    break;
+                default:
+                    textarea.innerHTML = textarea.innerHTML + getKeyValue(index);
+            }
         }
     });
 
     function capslockKeyboard() {
-
+        if(caps) {
+            caps = false;
+            changeKeyboard();
+        } else {
+            caps = true;
+            changeKeyboard();
+        }
     }
     function backspaceKeyboard() {
-
+        let str = textarea.innerHTML;
+        textarea.innerHTML = str.slice(0, -1);
     }
     function shiftKeyboard() {
 
     }
 
+
+    function changeKeyboard() {
+        const buttons = document.querySelectorAll('button');
+        if(lang === 'en') {
+            if(caps) {
+                for(let i = 0; i < 62; i++) {
+                    buttons[i].innerHTML = getKeyValue(i);
+                }
+            } else {
+                for(let i = 0; i < 62; i++) {
+                    buttons[i].innerHTML = getKeyValue(i);
+                }
+            }
+        } else {
+
+        }
+    }
 }
 
 сreateKeyboard();
