@@ -129,11 +129,14 @@ function сreateKeyboard() {
     });
 
     function capslockKeyboard() {
+        let cpsBtn = document.querySelector('[data-key="CapsLock"]');
         if(caps) {
             caps = false;
+            cpsBtn.classList.remove('caps');
             changeKeyboard();
         } else {
             caps = true;
+            cpsBtn.classList.add('caps');
             changeKeyboard();
         }
     }

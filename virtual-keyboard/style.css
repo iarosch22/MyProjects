@@ -89,7 +89,6 @@ textarea {
     background: rgba(255, 255, 255, 0.12);
 }
 
-.caps-on {
-    color: darkred;
-    text-transform: uppercase;
+.caps {
+    color: greenyellow;
 }
