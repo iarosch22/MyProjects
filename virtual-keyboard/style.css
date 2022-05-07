@@ -80,3 +80,7 @@ textarea {
     vertical-align: top;
     padding: 0;
 }
+
+.key:active {
+    background: rgba(255, 255, 255, 0.12);
+}
