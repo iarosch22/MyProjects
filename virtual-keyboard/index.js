@@ -8,8 +8,8 @@ const classes = ['key', 'key', 'key', 'key', 'key', 'key', 'key', 'key', 'key', 
 const data = ['Backquote', 'Digit1', 'Digit2', 'Digit3', 'Digit4', 'Digit5', 'Digit6', 'Digit7', 'Digit8', 'Digit9', 'Digit0', 'NumpadSubtract', 'Equal', 'Backspace',
              'Tab', 'KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT', 'KeyY', 'KeyU', 'KeyI', 'KeyO', 'KeyP', 'BracketLeft', 'BracketRight', 'Backslash',
              'CapsLock', 'KeyA', 'KeyS', 'KeyD', 'KeyF', 'KeyG', 'KeyH', 'KeyJ', 'KeyK', 'KeyL', 'Semicolon', 'Quote', 'Enter',
-             'ShiftLeft', 'KeyZ', 'KeyX', 'KeyC', 'KeyV', 'KeyB', 'KeyN', 'KeyM', 'NumpadDecimal', 'Period', 'Slash', 'ArrowUp' ,'ShiftLeft',
-             'ControlLeft', 'AltLeft', 'Space', 'AltLeft', 'ArrowLeft', 'ArrowDown', 'ArrowRight', 'ControlLeft'];
+             'ShiftLeft', 'KeyZ', 'KeyX', 'KeyC', 'KeyV', 'KeyB', 'KeyN', 'KeyM', 'Comma', 'Period', 'Slash', 'ArrowUp' ,'ShiftRight',
+             'ControlLeft', 'AltLeft', 'Space', 'AltRight', 'ArrowLeft', 'ArrowDown', 'ArrowRight', 'ControlRight'];
 
 
 const enKeys = ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace',
@@ -100,7 +100,33 @@ function сreateKeyboard() {
 
     document.addEventListener('keydown', function(event) {
         event.preventDefault();
-        console.log(event);
+
+        let key = event.code;
+        let index = data.indexOf(key);
+        switch (key) {
+            case 'Tab':
+                textarea.innerHTML = textarea.innerHTML + '    ';
+                break;
+            case 'CapsLock':
+                capslockKeyboard();
+                break;
+            case 'ShiftLeft':
+                shiftKeyboard();
+                break;
+            case 'Enter':
+                textarea.innerHTML = textarea.innerHTML + '\n';
+                break;
+            case 'Backspace':
+                backspaceKeyboard();
+                break;
+            case 'Space':
+                textarea.innerHTML = textarea.innerHTML + ' ';
+                break;
+            default:
+                textarea.innerHTML = textarea.innerHTML + getKeyValue(index);
+        }
+
+        console.log(event.code);
     })
     keyboard.addEventListener('click', function() {
         if(event.target.tagName === 'BUTTON') {
