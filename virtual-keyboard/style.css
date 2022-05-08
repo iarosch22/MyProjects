@@ -89,6 +89,9 @@ textarea {
     background: rgba(255, 255, 255, 0.12);
 }
 
+.active {
+    background: rgba(255, 255, 255, 0.12);
+}
 .caps {
     color: greenyellow;
 }

@@ -82,13 +82,24 @@ function сreateKeyboard() {
         if(lang === 'en') {
             if(caps) {
                 key = enCaps[index];
-            } else {
+            }
+            if(shift) {
+                key = enShift[index];
+            }
+            if(!caps && !shift) {
                 key = enKeys[index];
             }
         } else {
-            key = ruKeys[index];
+            if(caps) {
+                key = ruCaps[index];
+            } 
+            if(shift) {
+                key = ruShift[index];
+            }
+            if(!caps && !shift) {
+                key = ruKeys[index];
+            }
         }
-
         return key;
     }
     function getKeyClass(index) {
@@ -99,35 +110,57 @@ function сreateKeyboard() {
     }
 
     document.addEventListener('keydown', function(event) {
-        event.preventDefault();
 
+        let buttons = document.querySelectorAll('button');
         let key = event.code;
         let index = data.indexOf(key);
-        switch (key) {
-            case 'Tab':
-                textarea.innerHTML = textarea.innerHTML + '    ';
-                break;
-            case 'CapsLock':
-                capslockKeyboard();
-                break;
-            case 'ShiftLeft':
-                shiftKeyboard();
-                break;
-            case 'Enter':
-                textarea.innerHTML = textarea.innerHTML + '\n';
-                break;
-            case 'Backspace':
-                backspaceKeyboard();
-                break;
-            case 'Space':
-                textarea.innerHTML = textarea.innerHTML + ' ';
-                break;
-            default:
-                textarea.innerHTML = textarea.innerHTML + getKeyValue(index);
+        console.log(index);
+    
+        if(index >= 0) {
+            event.preventDefault();
+            buttons[index].classList.add('active');
+            switch (key) {
+                case 'Tab':
+                    textarea.innerHTML = textarea.innerHTML + '    ';
+                    break;
+                case 'CapsLock':
+                    capslockKeyboard();
+                    break;
+                case 'ShiftLeft':
+                    shiftKeyboard();
+                    break;
+                case 'ShiftRight':
+                    shiftKeyboard();
+                    break;
+                case 'Enter':
+                    textarea.innerHTML = textarea.innerHTML + '\n';
+                    break;
+                case 'Backspace':
+                    backspaceKeyboard();
+                    break;
+                case 'Space':
+                    textarea.innerHTML = textarea.innerHTML + ' ';
+                    break;
+                default:
+                    textarea.innerHTML = textarea.innerHTML + getKeyValue(index);
+            }
         }
 
         console.log(event.code);
     })
+    document.addEventListener('keyup', function(event) {
+        event.preventDefault();
+
+        let buttons = document.querySelectorAll('button');
+        let key = event.code;
+        let index = data.indexOf(key);
+        if(index >= 0) {
+            buttons[index].classList.remove('active');
+        }
+    })
+
+
+
     keyboard.addEventListener('click', function() {
         if(event.target.tagName === 'BUTTON') {
             let key = event.target.dataset.key;
@@ -141,6 +174,9 @@ function сreateKeyboard() {
                     capslockKeyboard();
                     break;
                 case 'ShiftLeft':
+                    shiftKeyboard();
+                    break;
+                case 'ShiftRight':
                     shiftKeyboard();
                     break;
                 case 'Enter':
@@ -175,7 +211,15 @@ function сreateKeyboard() {
         textarea.innerHTML = str.slice(0, -1);
     }
     function shiftKeyboard() {
+        let shiftBtn = document.querySelector('[data-key="Shift"]');
 
+        if(shift) {
+            shift = false;
+            changeKeyboard();
+        } else {
+            shift = true;
+            changeKeyboard();
+        }
     }
 
 
