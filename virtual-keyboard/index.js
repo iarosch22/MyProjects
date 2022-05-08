@@ -31,7 +31,7 @@ const enCaps = ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=',
                 'Ctrl', 'Alt', 'Space', 'Alt', '&#8592', '&#8595;', '&#8594;', 'Ctrl'];
 
 
-const ruKeys = ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace',
+const ruKeys = ['ё', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace',
                 `Tab`, 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', '\\',
                 'Capslock', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', 'Enter',
                 'Shift', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '.', '&#8593;' ,'Shift',
@@ -43,7 +43,7 @@ const ruShift = ['Ё', '!', '"', '№', ';', '%', ':', '?', '*', '(', ')', '_', 
                 'Shift', 'Я', 'Ч', 'С', 'М', 'И', 'Т', 'Ь', 'Б', 'Ю', ',', '&#8593;' ,'Shift',
                 'Ctrl', 'Alt', 'Space', 'Alt', '&#8592', '&#8595;', '&#8594;', 'Ctrl'];
 
-const ruCaps = ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace',
+const ruCaps = ['ё', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace',
                 `Tab`, 'Й', 'Ц', 'У', 'К', 'Е', 'Н', 'Г', 'Ш', 'Щ', 'З', 'Х', 'Ъ', '\\',
                 'Capslock', 'Ф', 'Ы', 'В', 'А', 'П', 'Р', 'О', 'Л', 'Д', 'Ж', 'Э', 'Enter',
                 'Shift', 'Я', 'Ч', 'С', 'М', 'И', 'Т', 'Ь', 'Б', 'Ю', '.', '&#8593;' ,'Shift',
@@ -51,7 +51,7 @@ const ruCaps = ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=',
 
 
 function сreateKeyboard() {
-    let lang = 'en';
+    let lang = 'ru';
     let caps = false;
     let shift = false;
 
@@ -106,7 +106,7 @@ function сreateKeyboard() {
         return classes[index];
     }
     function getKeyDate(index) {
-        return data[index];
+        return data[index];ё
     }
 
     document.addEventListener('keydown', function(event) {
@@ -114,11 +114,13 @@ function сreateKeyboard() {
         let buttons = document.querySelectorAll('button');
         let key = event.code;
         let index = data.indexOf(key);
+
         console.log(index);
     
         if(index >= 0) {
             event.preventDefault();
             buttons[index].classList.add('active');
+
             switch (key) {
                 case 'Tab':
                     textarea.innerHTML = textarea.innerHTML + '    ';
@@ -141,6 +143,9 @@ function сreateKeyboard() {
                 case 'Space':
                     textarea.innerHTML = textarea.innerHTML + ' ';
                     break;
+                case 'AltLeft':
+                    changeLanguage();
+                    break;   
                 default:
                     textarea.innerHTML = textarea.innerHTML + getKeyValue(index);
             }
@@ -165,7 +170,6 @@ function сreateKeyboard() {
         if(event.target.tagName === 'BUTTON') {
             let key = event.target.dataset.key;
             let index = data.indexOf(key);
-            
             switch (key) {
                 case 'Tab':
                     textarea.innerHTML = textarea.innerHTML + '    ';
@@ -188,6 +192,10 @@ function сreateKeyboard() {
                 case 'Space':
                     textarea.innerHTML = textarea.innerHTML + ' ';
                     break;
+                case 'AltLeft':
+                    break;
+                case 'AltRight':
+                    break;
                 default:
                     textarea.innerHTML = textarea.innerHTML + getKeyValue(index);
             }
@@ -206,13 +214,20 @@ function сreateKeyboard() {
             changeKeyboard();
         }
     }
+    function changeLanguage() {
+        if(lang === 'ru') {
+            lang = 'en';
+            changeKeyboard();
+        } else {
+            lang = 'ru';
+            changeKeyboard();
+        }
+    }
     function backspaceKeyboard() {
         let str = textarea.innerHTML;
         textarea.innerHTML = str.slice(0, -1);
     }
     function shiftKeyboard() {
-        let shiftBtn = document.querySelector('[data-key="Shift"]');
-
         if(shift) {
             shift = false;
             changeKeyboard();
@@ -236,7 +251,15 @@ function сreateKeyboard() {
                 }
             }
         } else {
-
+            if(caps) {
+                for(let i = 0; i < 62; i++) {
+                    buttons[i].innerHTML = getKeyValue(i);
+                }
+            } else {
+                for(let i = 0; i < 62; i++) {
+                    buttons[i].innerHTML = getKeyValue(i);
+                }
+            }
         }
     }
 }
