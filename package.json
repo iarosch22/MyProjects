@@ -1,0 +1,31 @@
+{
+  "name": "myprojects",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint ./",
+    "lint:fix": "eslint ./ --fix"
+  },
+  "rules": {
+    "no-restricted-globals": ["error", "event", "fdescribe"]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iarosch22/MyProjects.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iarosch22/MyProjects/issues"
+  },
+  "homepage": "https://github.com/iarosch22/MyProjects#readme",
+  "devDependencies": {
+    "eslint": "^8.15.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.6.2"
+  }
+}
