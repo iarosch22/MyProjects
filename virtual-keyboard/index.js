@@ -51,7 +51,10 @@ const ruCaps = ['ё', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '='
 
 
 function сreateKeyboard() {
-    let lang = 'ru';
+    let lang = 'en';
+    if(localStorage.getItem('language')) {
+        lang = localStorage.getItem('language');
+    }
     let caps = false;
     let shift = false;
 
@@ -230,9 +233,11 @@ function сreateKeyboard() {
     function changeLanguage() {
         if(lang === 'ru') {
             lang = 'en';
+            localStorage.setItem('language', lang);
             changeKeyboard();
         } else {
             lang = 'ru';
+            localStorage.setItem('language', lang);
             changeKeyboard();
         }
     }
