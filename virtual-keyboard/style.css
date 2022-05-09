@@ -21,6 +21,11 @@ textarea {
     overflow: auto;
     border-radius: 15px;
 }
+p {
+    text-align: center;
+    font-size: 14px;
+    color: darkgrey;
+}
 .keyboard {
     margin: 0 auto;
     padding: 5px;
